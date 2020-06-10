@@ -189,12 +189,12 @@ def export_markdown():
                     if check_image_hybrid(md_text):
                         make_text_bundle(md_text, filepath, mod_dt)                        
                     else:
-                        write_file(filepath + '.md', md_text, mod_dt)
+                        write_file(filepath + '.txt', md_text, mod_dt)
                 elif export_image_repository:
                     md_proc_text = process_image_links(md_text, filepath)
-                    write_file(filepath + '.md', md_proc_text, mod_dt)
+                    write_file(filepath + '.txt', md_proc_text, mod_dt)
                 else:
-                    write_file(filepath + '.md', md_text, mod_dt)
+                    write_file(filepath + '.txt', md_text, mod_dt)
     return note_count
 
 
