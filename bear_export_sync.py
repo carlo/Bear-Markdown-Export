@@ -436,14 +436,21 @@ def rsync_files_from_temp():
         if not os.path.exists(dest_path):
             os.makedirs(dest_path)
         if delete:
-            subprocess.call(['rsync', '-r', '-t', '-E', '--delete',
+            subprocess.call(['rsync',
+                             '--recursive',
+                             '--times',
+                             '--extended-attributes',
+                             '--delete',
                              '--exclude', 'BearImages/',
                              '--exclude', '.st*',
                              '--exclude', '.Ulysses*',
                              '--exclude', '*.Ulysses_Public_Filter',
                              temp_path + "/", dest_path])
         else:
-            subprocess.call(['rsync', '-r', '-t', '-E',
+            subprocess.call(['rsync',
+                             '--recursive',
+                             '--times',
+                             '--extended-attributes',
                              '--exclude', '.st*',
                             temp_path + "/", dest_path])
 
