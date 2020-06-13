@@ -37,11 +37,6 @@ or leave list empty for all notes: `limit_export_to_tags = []`
 * Or export as textbundles with images included
 '''
 
-make_tag_folders = False  # Exports to folders using first tag only, if `multi_tag_folders = False`
-multi_tag_folders = False  # Copies notes to all 'tag-paths' found in note!
-                          # Only active if `make_tag_folders = True`
-hide_tags_in_comment_block = True  # Hide tags in HTML comments: `<!-- #mytag -->`
-
 # The following two lists are more or less mutually exclusive, so use only one of them.
 # (You can use both if you have some nested tags where that makes sense)
 # Also, they only work if `make_tag_folders = True`.
@@ -80,9 +75,15 @@ parser.add_argument("--backup", default=default_backup_folder, help="Path where 
 parser.add_argument("--images", default=None, help="Path where images will be stored")
 parser.add_argument("--skipImport", action="store_const", const=True, default=False, help="When present, the script only exports from Bear to Markdown; it skips the import step.")
 parser.add_argument("--excludeTag", action="append", default=[], help="Don't export notes with this tag. Can be used multiple times.")
+parser.add_argument("--noTagFolders", action="store_const", const=True, default=False, help="Exports to folders using first tag only, unless '--noMultiTagFolders' is set")
+parser.add_argument("--noMultiTagFolders", action="store_const", const=True, default=False, help="Copies notes to all 'tag-paths' found in note. Ignored when '--noTagFolders' is set.")
+parser.add_argument("--showTags", action="store_const", const=True, default=False, help="Tags will be visible in notes, using the '. #tag' notation instead of wrapping them in HTML comments")
 
 parsed_args = vars(parser.parse_args())
 
+make_tag_folders = not parsed_args.get("noTagFolders")
+multi_tag_folders = not parsed_args.get("noMultiTagFolders")
+hide_tags_in_comment_block = not parsed_args.get("showTags")
 
 set_logging_on = True
 
