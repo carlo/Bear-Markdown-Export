@@ -442,7 +442,6 @@ def rsync_files_from_temp():
                              '--extended-attributes',
                              '--delete',
                              '--exclude', 'BearImages/',
-                             '--exclude', '.st*',
                              '--exclude', '.Ulysses*',
                              '--exclude', '*.Ulysses_Public_Filter',
                              temp_path + "/", dest_path])
@@ -451,7 +450,6 @@ def rsync_files_from_temp():
                              '--recursive',
                              '--times',
                              '--extended-attributes',
-                             '--exclude', '.st*',
                             temp_path + "/", dest_path])
 
 
